@@ -7,12 +7,20 @@ defmodule Bank do
   end
 
   # Public API
+  #  def deposit(amount) do
+  #   GenServer.cast(__MODULE__, {:deposit, amount})
+  # end
+
+  #  def withdraw(amount) do
+  #    GenServer.cast(__MODULE__, {:withdraw, amount})
+  #   end
+
   def deposit(amount) do
-    GenServer.cast(__MODULE__, {:deposit, amount})
+    GenServer.call(__MODULE__, {:deposit, amount})
   end
 
   def withdraw(amount) do
-    GenServer.cast(__MODULE__, {:withdraw, amount})
+    GenServer.call(__MODULE__, {:withdraw, amount})
   end
 
   def get_balance() do
@@ -25,12 +33,22 @@ defmodule Bank do
     {:ok, initial_balance}
   end
 
-  def handle_cast({:deposit, amount}, balance) do
-    {:noreply, balance + amount}
+  # def handle_cast({:deposit, amount}, balance) do
+  #   {:noreply, balance + amount}
+  # end
+
+  # def handle_cast({:withdraw, amount}, balance) do
+  #   {:noreply, balance - amount}
+  # end
+
+  def handle_call({:deposit, amount}, _from, balance) do
+    new_balance = balance + amount
+    {:reply,  "Current balance is #{new_balance}" ,  new_balance}
   end
 
-  def handle_cast({:withdraw, amount}, balance) do
-    {:noreply, balance - amount}
+  def handle_call({:withdraw, amount}, _from, balance) do
+    new_balance = balance - amount
+     {:reply,  "Current balance is #{new_balance}" ,  new_balance}
   end
 
   def handle_call(:get_balance, _from, balance) do
