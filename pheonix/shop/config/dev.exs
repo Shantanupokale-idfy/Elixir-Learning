@@ -1,11 +1,13 @@
 import Config
 
-# Configure your database
 config :shop, Shop.Repo,
-  database: Path.expand("../shop_dev.db", __DIR__),
-  pool_size: 5,
+  database: Path.expand("../priv/repo/dev.db", __DIR__),
+  pool_size: 1,
+  journal_mode: :wal,
+  busy_timeout: 5000,
   stacktrace: true,
   show_sensitive_data_on_connection_error: true
+
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
