@@ -6,4 +6,9 @@ defmodule ShopWeb.ProductController do
     render(conn, :index )
   end
 
+  def show(conn, %{"id" => id}) do
+
+    render(conn , :show , id: id , name: "nike")
+  end
+
 end
