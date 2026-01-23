@@ -1,4 +1,5 @@
 defmodule ShopWeb.Endpoint do
+ import Plug.Conn
   use Phoenix.Endpoint, otp_app: :shop
 
   # The session will be stored in the cookie and signed,
@@ -51,5 +52,20 @@ defmodule ShopWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
+  plug :check_promo_code
   plug ShopWeb.Router
+
+  def check_promo_code(%Plug.Conn{} = conn, _opts) do
+
+  promo_code = conn.params["promo"]
+
+  if promo_code == "secret-code" do
+    IO.inspect("promo is true ")
+    assign(conn, :promo , true)
+  else
+    assign(conn, :promo , false)
+  end
+
+  end
+
 end
