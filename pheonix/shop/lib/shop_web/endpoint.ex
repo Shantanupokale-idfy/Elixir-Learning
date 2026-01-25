@@ -67,4 +67,3 @@ defmodule ShopWeb.Endpoint do
 
 
 end
-
