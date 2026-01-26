@@ -10,7 +10,7 @@ defmodule ShopWeb.Router do
     plug :put_root_layout, html: {ShopWeb.Layouts, :root}
     plug :protect_from_forgery
     plug :put_secure_browser_headers
-    plug Plugs.SetConsole , "pc"
+    plug Plugs.SetConsole , "pc" # custom plug written by me
   end
 
   pipeline :api do
@@ -23,7 +23,50 @@ defmodule ShopWeb.Router do
     get "/", PageController, :home
     get "/products", ProductController, :index
     get "/products/:id", ProductController, :show
-  end
+
+
+    #resources "/products" , ProductController
+
+    #this will give you all the routes needed for your app , and can check by mix phx.routes | grep products
+    # automatically creates beloow routes
+    # GET     /products            ShopWeb.ShopWeb.ProductController :index
+    # GET     /products/:id/edit   ShopWeb.ShopWeb.ProductController :edit
+    # GET     /products/new        ShopWeb.ShopWeb.ProductController :new
+    # GET     /products/:id          ShopWeb.ShopWeb.ProductController :show
+    # POST    /products              ShopWeb.ShopWeb.ProductController :create
+    # PATCH   /products/:id          ShopWeb.ShopWeb.ProductController :update
+    # PUT     /products/:id          ShopWeb.ShopWeb.ProductController :update
+    # DELETE  /products/:id          ShopWeb.ShopWeb.ProductController :delete
+
+
+
+
+# to get nested routes we can do
+  #     resources "/user" , Usercontroller do
+  #          resources "/post" , PostController
+  #     end
+
+  # you can get this routes
+  # GET     /user                                   ShopWeb.Usercontroller :index
+  # GET     /user/:id/edit                          ShopWeb.Usercontroller :edit
+  # GET     /user/new                               ShopWeb.Usercontroller :new
+  # GET     /user/:id                               ShopWeb.Usercontroller :show
+  # POST    /user                                   ShopWeb.Usercontroller :create
+  # PATCH   /user/:id                               ShopWeb.Usercontroller :update
+  # PUT     /user/:id                               ShopWeb.Usercontroller :update
+  # DELETE  /user/:id                               ShopWeb.Usercontroller :delete
+  # GET     /user/:usercontroller_id/post           ShopWeb.ShopWeb.PostController :index
+  # GET     /user/:usercontroller_id/post/:id/edit  ShopWeb.ShopWeb.PostController :edit
+  # GET     /user/:usercontroller_id/post/new       ShopWeb.ShopWeb.PostController :new
+  # GET     /user/:usercontroller_id/post/:id       ShopWeb.ShopWeb.PostController :show
+  # POST    /user/:usercontroller_id/post           ShopWeb.ShopWeb.PostController :create
+  # PATCH   /user/:usercontroller_id/post/:id       ShopWeb.ShopWeb.PostController :update
+  # PUT     /user/:usercontroller_id/post/:id       ShopWeb.ShopWeb.PostController :update
+  # DELETE  /user/:usercontroller_id/post/:id       ShopWeb.ShopWeb.PostController :delete
+
+
+
+end
 
   # Other scopes may use custom stacks.
   # scope "/api", ShopWeb do
