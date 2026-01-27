@@ -1,5 +1,5 @@
 <h1>This is the product listing page written by page embedding </h1>
-<p :if = {@promo}>You have a Promo-Code wayy!!!</p> 
 
-<.product :for={product <- @products} name={product.name} />
+<p :if={@promo}>You have a Promo-Code wayy!!!</p>
 
+<.product :for={product <- @products} product={product} />

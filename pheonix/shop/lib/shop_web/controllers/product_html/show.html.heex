@@ -1,5 +1,6 @@
-<h1> this is the product  page for id = <%= @product.name %></h1> 
+<h1>This is the product page for: <%= @product.name %></h1>
 
-<.product :if={@product} name={@product.name} />
+<.product :if={@product} product={@product} />
 
-<.button> Click me </.button>
+<.button>Click me</.button>
+=.=.
